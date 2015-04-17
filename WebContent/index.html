@@ -5,35 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" type="text/css" href="css/result-light.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href="css/login.css" rel="stylesheet">
+    <script src="js/index.js" rel="text/javascript"></script>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-md-4 col-md-offset-4">
-                <h1 class="text-center login-title">Sign in to continue to Bootsnipp</h1>
+                <h1 class="text-center login-title">Registration Access Page</h1>
+                <h3 class="text-center login-title">University Portal Logon</h3>
                 <div class="account-wall">
                     <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                         alt="">
-                    <form class="form-signin">
+                    <form class="form-signin" action="landingPage.html" onsubmit="login();">
                     <input type="text" class="form-control" placeholder="Email" required autofocus>
                     <input type="password" class="form-control" placeholder="Password" required>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">
                         Sign in</button>
                     <label class="checkbox pull-left">
                         <input type="checkbox" value="remember-me">
                         Remember me
                     </label>
-                    <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                    <a href="http://www.google.com" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
                     </form>
                 </div>
-                <a href="#" class="text-center new-account">Create an account </a><!-- dont think this is needed for our app -->
+                <!-- <a href="#" class="text-center new-account">Create an account </a>dont think this is needed for our app -->
             </div>
         </div>
     </div>
-    
-    <center><a href="landingPage.html" style="">Temporary Link to Landing Page</a></center>
 </body>
 </html>
