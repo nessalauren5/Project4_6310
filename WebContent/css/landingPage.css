@@ -1,0 +1,56 @@
+body {
+    padding-top: 70px;
+}
+
+.hero-spacer {
+    margin-top: 50px;
+}
+
+.hero-feature {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.imgAndInfo {
+	float:left;
+	padding-right: 10px;
+}
+
+.imgAndInfoContainer {
+	display: inline-block;
+	width: 120%;
+}
+
+.imgAndInfoText {
+	float:left;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 25%;
+}
+.imgAndInfoText2 {
+	float:left;
+	padding-left: 50px;
+	padding-right: 10px;
+	width: 30%;
+}
+
+.imgAndInfoFirstRow {
+	float:left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+li {
+	padding-left: 10px;
+}
+
+.selectpicker {
+	margin-top: 6px;
+}
+
+.floatRight {
+	float:right;
+}

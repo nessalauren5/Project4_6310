@@ -73,3 +73,11 @@
     display: block;
     margin-top: 10px;
 }
+
+body > div > div > div > div > form > label {
+    margin-left: 20px;
+}
+
+body > div > div > div > div > form > label > input[type="checkbox"] {
+    margin-left: 0px;
+}
