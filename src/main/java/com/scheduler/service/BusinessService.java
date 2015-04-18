@@ -2,9 +2,9 @@ package com.scheduler.service;
 
 import com.scheduler.dao.CourseDAO;
 import com.scheduler.dao.UserDAO;
-import com.scheduler.model.Course;
-import com.scheduler.model.ResultObject;
-import com.scheduler.model.User;
+import com.scheduler.dbmodel.Course;
+import com.scheduler.dbmodel.ResultObject;
+import com.scheduler.dbmodel.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

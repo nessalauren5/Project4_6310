@@ -1,4 +1,4 @@
-package com.scheduler.model;
+package com.scheduler.dbmodel;
 
 import java.util.ArrayList;
 import java.util.List;

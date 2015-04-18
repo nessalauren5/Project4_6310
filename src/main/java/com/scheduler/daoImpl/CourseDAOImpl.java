@@ -1,12 +1,10 @@
 package com.scheduler.daoImpl;
 
 import com.scheduler.dao.CourseDAO;
-import com.scheduler.model.Course;
-import com.scheduler.model.User;
+import com.scheduler.dbmodel.Course;
+import com.scheduler.dbmodel.User;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +13,8 @@ import java.util.ArrayList;
 @Service
 public class CourseDAOImpl implements CourseDAO {
 
-    @PersistenceContext
-    EntityManager em;
+//    @PersistenceContext
+//    EntityManager entityManagerFactory;
 
     public boolean setPriorityForUser(User u, Course c){
         //TODO: add implementation
