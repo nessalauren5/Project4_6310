@@ -37,8 +37,8 @@ public class User implements Serializable{
     @Column(name="UserType",columnDefinition = "CHAR(13)")
     private String usertype;
 
-    @Column(name="isTA",columnDefinition = "TINYINT")
-    private int isTA;
+    @Column(name="isTA",columnDefinition = "BOOLEAN")
+    private boolean isTA;
 
     public long getUser_id() {
         return user_id;
@@ -80,11 +80,11 @@ public class User implements Serializable{
         this.usertype = usertype;
     }
 
-    public int getIsTA() {
+    public boolean getIsTA() {
         return isTA;
     }
 
-    public void setIsTA(int isTA) {
+    public void setIsTA(boolean isTA) {
         this.isTA = isTA;
     }
 }

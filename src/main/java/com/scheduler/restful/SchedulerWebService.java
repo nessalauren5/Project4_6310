@@ -17,15 +17,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-
+@Path("/")
 @Controller
-@RequestMapping("/")
 public class SchedulerWebService {
 
 	@Autowired
 	private BusinessService bs;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GET
 	public String printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world, welcome to our scheduler web app!");
 		return "hello";
