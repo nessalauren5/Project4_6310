@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2015 at 06:00 PM
+-- Generation Time: Apr 19, 2015 at 02:54 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -6279,8 +6279,25 @@ CREATE TABLE IF NOT EXISTS `studentpreferences` (
   `SemesterID` varchar(20) NOT NULL,
   `numberOfCourses` int(11) NOT NULL,
   `CourseList` varchar(250) NOT NULL COMMENT 'Comma delimited?',
+  `Date` datetime NOT NULL,
   PRIMARY KEY (`StudentPreferenceID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `studentpreferences`
+--
+
+INSERT INTO `studentpreferences` (`StudentPreferenceID`, `StudentID`, `SemesterID`, `numberOfCourses`, `CourseList`, `Date`) VALUES
+(1, '53064629', '201505', 4, '6475,7637,8802,8803', '2015-04-18 00:00:00'),
+(2, '53252020', '201505', 2, '6250,8802', '2015-04-17 00:00:00'),
+(3, '54374605', '201505', 3, '8802,6250,7637', '2015-04-18 04:17:00'),
+(4, '54495096', '201505', 3, '7637,8803,6475', '2015-04-15 00:00:00'),
+(5, '54620213', '201505', 3, '8802,8803,6475', '2015-04-18 00:00:00'),
+(6, '54744611', '201505', 6, '6250,6300,6475,7637,8802,8803', '2015-04-18 00:00:00'),
+(7, '54838884', '201505', 1, '8803', '2015-04-18 00:00:00'),
+(8, '55818894', '201505', 2, '6300,6475', '2015-04-18 00:00:00'),
+(9, '55970401', '201505', 1, '6475', '2015-04-18 18:28:25'),
+(10, '55970591', '201505', 2, '6300,8802', '2015-04-18 00:00:00');
 
 -- --------------------------------------------------------
 
