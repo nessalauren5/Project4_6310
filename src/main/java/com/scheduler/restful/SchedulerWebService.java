@@ -17,24 +17,30 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
-
+@Path("/")
 @Controller
-@RequestMapping("/")
 public class SchedulerWebService {
 
 	@Autowired
 	private BusinessService bs;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
+	@GET
+	public Response printWelcome(ModelMap model) {
 		model.addAttribute("message", "Hello world, welcome to our scheduler web app!");
-		return "hello";
+		return Response.ok(model,MediaType.APPLICATION_XHTML_XML_TYPE).build();
 	}
 
 	@GET
 	@Produces("application/json")
 	@Path("test")
 	public Response testService() {
+		return Response.ok().build();
+	}
+
+	@POST
+	@Produces("application/json")
+	@Path("/user/courses")
+	public Response availCourses(User user){
 		return Response.ok().build();
 	}
 
