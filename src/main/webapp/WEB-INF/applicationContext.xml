@@ -11,4 +11,32 @@
     <mvc:annotation-driven/>
     <tx:annotation-driven/>
 
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+            <property name="url" value="jdbc:mysql//localhost:3306/schedulerDB"/>
+            <property name="username" value="root"/>
+            <property name="password" value=""/>
+        </bean>
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+            </property>
+            <property name="jpaProperties">
+                <props>
+                    <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+                    <prop key="hibernate.show_sql">false</prop>
+                    <prop key="hibernate.jdbc.batch_size">25</prop>
+                    <!-- change this to 'verify' before running as a production app -->
+                    <prop key="hibernate.hbm2ddl.auto">update</prop>
+                    <prop key="hibernate.connection.autocommit">false</prop>
+                </props>
+            </property>
+        </bean>
+
+
 </beans>

@@ -9,7 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Heroic Features - Start Bootstrap Template</title>
+    <title>Registration Access Page</title>
+    <!--jQuery CSS -->
+    <link href="css/jquery-ui.css" rel="stylesheet">
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -17,13 +19,13 @@
     <!-- Custom CSS -->
     <link href="css/landingPage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!--jQuery-->
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/landingPage.js"></script>
 </head>
 
 <body>
@@ -45,7 +47,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#"></a>
+                        <a href="index.html">Logout</a>
                     </li>
                     <li>
                         <a href="#"></a>
@@ -55,9 +57,7 @@
                     </li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
     </nav>
 
     <!-- Page Content -->
@@ -68,7 +68,7 @@
             <h1 style="display:inline;">Welcome [name]!</h1>
             <h3 style="display:inline; float: right;"> Fall 2015 </h3>
             <div class="imgAndInfoContainer">
-                <img class="imgAndInfo" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt="">
+                <img class="imgAndInfo" src="img/profilePhoto.png" alt="">
                 <div class="imgAndInfoText col-md-2">
                     <div class="imgAndInfoRow">
                         <p id="fname" class="imgAndInfo">First Name</p>
@@ -95,11 +95,10 @@
                     <div class="imgAndInfoRow">
                         <p class="imgAndInfo">Semester: </p>
                         <select class="selectpicker imgAndInfo">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            <option value="Fall 2015">Fall 2015</option>
+                            <option value="Spring 2016">Spring 2016</option>
+                            <option value="Summer 2016">Summer 2016</option>
+                            <option value="Fall 2016">Fall 2016</option>
                         </select>
                     </div>
                     <div class="imgAndInfoRow">
@@ -116,10 +115,9 @@
         <!-- Title -->
         <div class="row">
             <div class="col-lg-12">
-                <h3>Course Preferences and Schedule</h3>
+                <h3>Course Schedule and Preferences</h3>
             </div>
         </div>
-        <!-- /.row -->
 
         <!-- Page Features -->
         <div class="row text-center">
@@ -139,16 +137,27 @@
             <div class="col-md-6 col-sm-12 hero-feature">
                 <div class="thumbnail">
                     <div class="caption">
-                        <h3>To be continued...</h3>
-                        <p>Course Prefences here</p>
-                        <p>
-                            <a href="http://thecatapi.com/" class="btn btn-primary">Click for some killa kats</a> <a href="http://assets.scumbagsteve.com/hashed_silo_content/c8c/cb9/45e/resized/gives-need-more-information-as-an-answer-choice-really-wants-you-to-choose-from-the-others-instead-961efb.jpg" class="btn btn-default">More Info</a>
-                        </p>
+                        <h3>Course Preferences</h3>
+                        <div class="thumbnail">
+                            <ol class="sortable-list">
+                                <li class="sortable-item">
+                                    <span>6310: SAP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>7367 KBAI</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>6300: SDP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>6601 AI</span>
+                                </li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.row -->
 
         <hr>
 
@@ -162,14 +171,6 @@
         </footer>
 
     </div>
-    <!-- /.container -->
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

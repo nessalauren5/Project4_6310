@@ -1,7 +1,7 @@
 package com.scheduler.dao;
 
-import com.scheduler.model.Course;
-import com.scheduler.model.User;
+import com.scheduler.dbmodel.Course;
+import com.scheduler.dbmodel.User;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,6 @@
 package com.scheduler.dao;
 
-import com.scheduler.model.User;
-
+import com.scheduler.dbmodel.User;
 /**
  * Created by vlanderson on 4/13/15.
  */

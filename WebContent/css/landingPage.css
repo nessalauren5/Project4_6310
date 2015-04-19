@@ -46,6 +46,9 @@ footer {
 li {
 	padding-left: 10px;
 }
+ul {
+	-webkit-padding-start: 0px;
+}
 
 .selectpicker {
 	margin-top: 6px;
@@ -53,4 +56,50 @@ li {
 
 .floatRight {
 	float:right;
+}
+
+.sortable-item {
+  background-color: #FFF;
+  border: 1px solid #000;
+  cursor: move;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+ol {
+    counter-reset:li;
+    margin-left:0;
+    padding-left:0;
+    -webkit-padding-start: 0px;
+}
+ol > li {
+    position:relative;
+    top:.5em;
+    left:-1em;
+    margin:0 0 6px 2em;
+    padding:4px 8px;
+    list-style:none;
+    border-top:2px solid #666;
+    background:#f6f6f6;
+}
+ol > li:before {
+    content:counter(li);
+    counter-increment:li;
+    position:absolute;
+    top:1em;
+    left:0.5em;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:2em;
+    margin-right:8px;
+    padding:4px;
+    border-top:2px solid #666;
+    color:#fff;
+    background:#666;
+    font-weight:bold;
+    text-align:center;
 }

@@ -3,12 +3,13 @@ package com.scheduler.model;
 import java.util.ArrayList;
 
 /**
- * Created by vlanderson on 2/4/15.
+ * Created by jrao and vkodali on 4/18/15.
  */
 public class Course {
 
     private String name;
-    private Integer courseID;
+    private String courseID;
+	ArrayList<String> Students;
     private ArrayList<Course> prerequisites;
     private ArrayList<Term> termsAvailable = new ArrayList<Term>();
 
@@ -20,17 +21,16 @@ public class Course {
         termsAvailable.add(t);
     }
 
-
     public boolean isAvailableInTerm(Term t){
         return this.termsAvailable.contains(t);
     }
-    public Integer getCourseID() {
+    public String getCourseID() {
         return courseID;
     }
     public ArrayList<Course> getPrerequisites() {
         return prerequisites;
     }
-    public Course(Integer id, String name){
+    public Course(String id, String name){
         this.name = name;
         this.courseID = id;
     }
@@ -45,5 +45,20 @@ public class Course {
         }
         this.prerequisites.add(c);
     }
+    	
+	public Course(String Name) {
+		courseID = Name;
+		Students = new ArrayList<String>();
+		return;
+	}
+	
+	public void AddStudent(String StudentID) {
+		Students.add(StudentID);
+		return;
+	}
+	
+	public ArrayList<String> GetStudentArray() {
+		return Students;
+	}
 
 }
