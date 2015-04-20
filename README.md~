@@ -23,5 +23,5 @@ The remainder of the files are included in the /lib folder for the project
 - /database : contains the database README file and the two sql files to generate the database tables for this project
 
 #Directions for use
-Import the project into the Eclipse Luna IDE for, JAVA EE and make sure the build path has the compiler set to Java 1.7 and all the libraries added from the /lib folder. Add the Tomcat server as a server and make sure the JAVA_HOME variable is set. Open SQL Server and create a project called Project4.  Run the files in the database folder. Configure the project to run on Tomcat or select the project name and Run it on the Tomcat server. 
+Import the project into the Eclipse Luna IDE for, JAVA EE and make sure the build path has the compiler set to Java 1.7 and all the libraries added from the /lib folder. Add the Tomcat server as a server and make sure the JAVA_HOME variable is set. Configure the project to run on Tomcat or select the project name and Run it on the Tomcat server.
 
