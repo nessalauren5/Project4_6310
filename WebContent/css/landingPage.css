@@ -119,3 +119,7 @@ ol > li:before {
 .text-red {
     color: red;
 }
+
+.clearBoth {
+    clear:both;
+}
