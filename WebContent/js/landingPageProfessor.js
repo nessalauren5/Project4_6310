@@ -8,8 +8,8 @@ function getRecommendedSchedule() {
     //Call to retrieve list
     var courses = {};
 
-    $.each('.priority',function(key, course) {
-      courses.push(course.text);
+    $('.priority').each(function(key, course) {
+      courses.push(course.id);
     });
 
     var json = JSON.stringify({courseList:courses});
