@@ -5,6 +5,10 @@
 		 version="3.0">
 
 	<display-name>Spring MVC Application</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>landingPageStudent.html</welcome-file>
+	</welcome-file-list>
 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -23,6 +27,10 @@
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>com.sun.jersey.config.feature.DisableWADL</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>

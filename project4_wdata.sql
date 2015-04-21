@@ -9028,7 +9028,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
+INSERT INTO `users` (userID, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
   (53035889, '', '', '', '', 'Student', 0),
   (53042193, '', '', '', '', 'Student', 0),
   (53052056, '', '', '', '', 'Student', 0),
@@ -10276,7 +10276,7 @@ INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName
   (55980204, '', '', '', '', 'Student', 0),
   (55980211, '', '', '', '', 'Student', 0),
   (55980216, '', '', '', '', 'Student', 0);
-INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
+INSERT INTO `users` (userID, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
   (55980217, '', '', '', '', 'Student', 0),
   (55980232, '', '', '', '', 'Student', 0),
   (55980259, '', '', '', '', 'Student', 0),
@@ -11524,7 +11524,7 @@ INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName
   (56057374, '', '', '', '', 'Student', 0),
   (56057376, '', '', '', '', 'Student', 0),
   (56057680, '', '', '', '', 'Student', 0);
-INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
+INSERT INTO `users` (userID, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
   (56057724, '', '', '', '', 'Student', 0),
   (56057726, '', '', '', '', 'Student', 0),
   (56057728, '', '', '', '', 'Student', 0),
@@ -11695,7 +11695,7 @@ INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName
 --
 DROP TABLE IF EXISTS `studentinfo`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `studentinfo` AS select `users`.`StudentID` AS `StudentID`,`studentseniority`.`CreditsEarned` AS `CreditsEarned`,`courserecord`.`CourseID` AS `CourseID`,`courserecord`.`SemesterID` AS `SemID`,`courserecord`.`Grade` AS `Grade`,`studentpreferences`.`SemesterID` AS `PSemID`,`studentpreferences`.`numberOfCourses` AS `NumberCourses`,`studentpreferences`.`CourseList` AS `CList`,`studentpreferences`.`Date` AS `PDate`,`recommededsolution`.`recommendedCourses` AS `RecCor`,`recommededsolution`.`date` AS `RecDate` from ((((`users` join `studentseniority` on((`users`.`StudentID` = `studentseniority`.`StudentID`))) join `courserecord` on((`users`.`StudentID` = `courserecord`.`StudentID`))) join `studentpreferences` on((`users`.`StudentID` = `studentpreferences`.`StudentID`))) join `recommededsolution` on((`users`.`StudentID` = `recommededsolution`.`StudentID`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `studentinfo` AS select `users`.userID AS `StudentID`,`studentseniority`.`CreditsEarned` AS `CreditsEarned`,`courserecord`.`CourseID` AS `CourseID`,`courserecord`.`SemesterID` AS `SemID`,`courserecord`.`Grade` AS `Grade`,`studentpreferences`.`SemesterID` AS `PSemID`,`studentpreferences`.`numberOfCourses` AS `NumberCourses`,`studentpreferences`.`CourseList` AS `CList`,`studentpreferences`.`Date` AS `PDate`,`recommededsolution`.`recommendedCourses` AS `RecCor`,`recommededsolution`.`date` AS `RecDate` from ((((`users` join `studentseniority` on((`users`.userID = `studentseniority`.`StudentID`))) join `courserecord` on((`users`.userID = `courserecord`.`StudentID`))) join `studentpreferences` on((`users`.userID = `studentpreferences`.`StudentID`))) join `recommededsolution` on((`users`.userID = `recommededsolution`.`StudentID`)));
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

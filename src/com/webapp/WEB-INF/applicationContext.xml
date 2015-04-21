@@ -34,6 +34,7 @@
                     <!-- change this to 'verify' before running as a production app -->
                     <prop key="hibernate.hbm2ddl.auto">update</prop>
                     <prop key="hibernate.connection.autocommit">false</prop>
+                    <prop key="hibernate.logLevel">Trace</prop>
                 </props>
             </property>
         </bean>

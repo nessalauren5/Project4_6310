@@ -4,9 +4,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Created by vlanderson on 4/18/15.
@@ -18,8 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class StudentPrefs {
 
     @Id
-    @Column(name="StudentID",columnDefinition = "INT")
-    private int studentID;
+    @Column(name="userID",columnDefinition = "INT")
+    private int userID;
 
     @Column(name="NumberCourses",columnDefinition = "INT")
     private int numCourses;
@@ -30,15 +27,25 @@ public class StudentPrefs {
     @Column(name = "CreditsEarned")
     private int credits;
 
-    public int getStudentID() {
-        return studentID;
+    @Column(name="firstName",columnDefinition = "VARCHAR(30)")
+    private String firstName;
+
+    @Column(name="lastName",columnDefinition = "VARCHAR(30)")
+    private String lastName;
+
+    @Column(name="major", columnDefinition = "VARCHAR(50)")
+    private String major;
+
+    public int getUserID() {
+        return userID;
+    }
+    public String getUserIDStr() {
+        return String.valueOf(userID);
     }
 
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
+    public void setUserID(int studentID) {
+        this.userID = studentID;
     }
-
-
 
     public int getNumCourses() {
         return numCourses;
@@ -62,5 +69,29 @@ public class StudentPrefs {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 }

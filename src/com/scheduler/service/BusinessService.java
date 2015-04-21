@@ -6,12 +6,16 @@ import com.scheduler.dbmodel.*;
 import com.scheduler.math.Solver;
 import com.scheduler.model.Course;
 import com.scheduler.model.Student;
+import javassist.bytecode.stackmap.TypeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by vlanderson on 4/13/15.
@@ -25,22 +29,33 @@ public class BusinessService {
     @Autowired
     private CourseDAO coursedao;
 
+    private static final Logger log = Logger.getLogger( TypeData.ClassName.class.getName() );
 
     public ResultObject<User> authUser(User user){
         ResultObject<User> response = new ResultObject<User>();
-        User u = userdao.getUserByCredentials(user);
-
-        if(u==null || !user.getPassword().equals(user.getPassword())){
+        log.log(Level.INFO, user.getUsername() + " is attemping to login");
+        try {
+            User u = userdao.getUserByCredentials(user);
+            if(u==null || !user.getPassword().equals(user.getPassword())) {
+                response.setStatus("failed");
+                response.addError("Password is incorrect.");
+                log.log(Level.SEVERE, "Password is incorrect.");
+            }
+            else {
+                response.setStatus("success");
+                response.setObject(u);
+                log.log(Level.INFO, u.getUsertype() + " " +  u.getUserID() + " logged in successfully");
+            }
+        }catch(NoResultException e){
             response.setStatus("failed");
+            response.addError("User not found.");
+                log.log(Level.SEVERE, "User not found.");
         }
-        else {
-            response.setStatus("success");
-            response.setObject(u);
-        }
+
         return response;
     }
 
-    public ResultObject<CourseModel> setCourseForUser(User user, CourseModel c){
+    public ResultObject<CourseModel> setCoursesForUser(User user, CourseModel c){
         ResultObject<CourseModel> response = new ResultObject<CourseModel>();
 
         if(coursedao.setPriorityForUser(user, c)){
@@ -53,21 +68,71 @@ public class BusinessService {
         return response;
     }
 
-    public ResultObject<ArrayList<CourseModel>> getCourseList(User user){
-        ResultObject<ArrayList<CourseModel>> response = new ResultObject<ArrayList<CourseModel>>();
-        response.setObject(coursedao.getCourseListForUser(user));
-        if(response.getObject()!=null){
-            response.setStatus("success");
-        }
-        else{
+    public ResultObject<List<CourseModel>> getCourseList(){
+        log.log(Level.INFO, "Retrieving course list");
+        ResultObject<List<CourseModel>> response = new ResultObject<List<CourseModel>>();
+        try {
+            List<CourseModel> list = coursedao.getAllCourses();
+            response.setObject(list);
+            if (response.getObject() != null) {
+                response.setStatus("success");
+            } else {
+                response.setStatus("failed");
+            }
+        }catch(NoResultException e){
             response.setStatus("failed");
+            response.addError("No results returned.");
+            log.log(Level.SEVERE, "No course results found.");
         }
         return response;
     }
 
-    public ResultObject< ArrayList<Course>> generateRecommendationFor(String studentID) {
+    public ResultObject<List<CourseModel>> getPriorityList(String studentID){
+        log.log(Level.INFO, "Retrieving priority course list for " + studentID);
+        StudentPrefs sp = userdao.getUserDetails(studentID);
+        String [] courses = sp.getCourseStr().split(",");
 
+        ResultObject<List<CourseModel>> response = new ResultObject<List<CourseModel>>();
+
+        if(courses==null || courses.length == 0){
+            response.setStatus("SUCCESS");
+            response.setMessage("No Courses found for user.");
+        }
+        else {
+            for(int i =0; i<courses.length; i++){
+                log.log(Level.INFO,"Searching for course: " + courses[i]);
+            }
+            try {
+                List<CourseModel> list = coursedao.getCourseListForUser(courses);
+                log.log(Level.INFO, "Found " + list.size() + " courses");
+                        response.setObject(list);
+                if (response.getObject() != null) {
+                    response.setStatus("success");
+                } else {
+                    response.setStatus("failed");
+                }
+            } catch (NoResultException e) {
+                response.setStatus("failed");
+                response.addError("No results returned.");
+                log.log(Level.SEVERE, "No course results found.");
+            }
+        }
+        return response;
+    }
+
+    public ResultObject< ArrayList<Course>> generateRecommendationFor(String studentID, String numCourses) {
+        if(numCourses.isEmpty()){
+            numCourses = "2";
+        }
+        log.log(Level.INFO, "User " + studentID + " is requesting course recommendation.");
         List<StudentPrefs> stuList = userdao.getAllStudents();
+
+        for(StudentPrefs pf :stuList){
+            if(pf.getUserIDStr().equals(studentID)){
+                pf.setNumCourses(Integer.parseInt(numCourses));
+            }
+        }
+
         List<CourseModel> courseList = coursedao.getAllCourses();
 
 
@@ -77,7 +142,7 @@ public class BusinessService {
         for(StudentPrefs p : stuList){
             Student s = new Student();
             s.setCredits(p.getCredits());
-            s.setStudentID(String.valueOf(p.getStudentID()));
+            s.setStudentID(String.valueOf(p.getUserID()));
             s.setStudentPreferences(p.getCourseStr());
 
             students.put(s.getStudentID(),s);
@@ -102,6 +167,20 @@ public class BusinessService {
 
         ResultObject<ArrayList<Course>> response = new ResultObject<ArrayList<Course>>();
         response.setObject(takenList);
+        return response;
+    }
+
+    public ResultObject<StudentPrefs> getUser(String studentID) {
+        log.log(Level.INFO," finding user details: " + studentID );
+        ResultObject<StudentPrefs> response;
+        try{
+            StudentPrefs u = userdao.getUserDetails(studentID);
+             response = new ResultObject<StudentPrefs>();
+            response.setObject(u);
+        }catch(NoResultException e){
+           response = new ResultObject<StudentPrefs>();
+            response.addError("No user found with that ID.");
+        }
         return response;
     }
 }

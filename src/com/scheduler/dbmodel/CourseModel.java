@@ -22,9 +22,9 @@ import java.io.Serializable;
 public class CourseModel implements Serializable{
 
     @Id
-    @Column(name="CourseID",columnDefinition = "Integer", updatable=false, nullable=false)
+    @Column(name="CourseID",columnDefinition = "INT", updatable=false, nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int courseID;
+    private String courseID;
 
     @Column(name="CourseName",columnDefinition = "VARCHAR(50)")
     private String name;
@@ -35,11 +35,11 @@ public class CourseModel implements Serializable{
     @Column(name= "Availibility",columnDefinition = "CHAR(11)")
     private String availability;
 
-    public int getCourseID() {
+    public String getCourseID() {
         return courseID;
     }
 
-    public void setCourseID(int courseID) {
+    public void setCourseID(String courseID) {
         this.courseID = courseID;
     }
 
