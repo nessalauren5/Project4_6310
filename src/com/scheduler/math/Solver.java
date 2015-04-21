@@ -2,6 +2,7 @@ package com.scheduler.math;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ public class Solver {
 	private HashMap<String,Course> courseHashMap;
 	private HashMap<String, GRBVar> gurobiVaraibles;
 	String[][] result;
+	List<String> rC = new ArrayList<String>();
 	String[] recommendedCourses;
 	private Student TargetStudent;
 	private GRBEnv environment;
@@ -73,6 +75,7 @@ public class Solver {
 			Courses = TargetStudent.GetCourses();
 			StudentID = TargetStudent.getStudentID();
 			result = new String[Courses.length][2];
+			int recommendationCounter = 0;
 			try {
 				if (Courses != null) {
 					for (int i=0;i<Courses.length;i++) {
@@ -80,8 +83,12 @@ public class Solver {
 						result[i][0] = Courses[i].toString();
 						result[i][1] = Double.toString(variable.get(GRB.DoubleAttr.X));
 						log.log(Level.INFO, Courses[i] + " " + variable.get(GRB.DoubleAttr.X));
+						if (variable.get(GRB.DoubleAttr.X) == 1)
+							rC.add(Courses[i].toString());
 					}
-					recommendedCourses = Courses;
+					for (int i=0;i< rC.size();i++) {
+						recommendedCourses[i] = rC.get(i);
+					}
 					return recommendedCourses;
 				}
 			} catch (Exception e) {

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "users")
-@XmlRootElement(name="Users")
+@XmlRootElement(name="users")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 @org.hibernate.annotations.DynamicUpdate(value = true)
@@ -21,9 +21,9 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     @Id
-    @Column(name="StudentID",columnDefinition = "INT", updatable=false, nullable=false)
+    @Column(name= "userID",columnDefinition = "INT", updatable=false, nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long user_id;
+    private long userID;
 
     @Column(name="password", columnDefinition= "VARCHAR(30)")
     private String password;
@@ -32,7 +32,10 @@ public class User implements Serializable{
     private String username;
 
     @Column(name="firstName",columnDefinition = "VARCHAR(30)")
-    private String name;
+    private String firstName;
+
+    @Column(name="lastName",columnDefinition = "VARCHAR(30)")
+    private String lastName;
 
     @Column(name="UserType",columnDefinition = "CHAR(13)")
     private String usertype;
@@ -40,12 +43,12 @@ public class User implements Serializable{
     @Column(name="isTA",columnDefinition = "BOOLEAN")
     private boolean isTA;
 
-    public long getUser_id() {
-        return user_id;
+    public long getUserID() {
+        return userID;
     }
 
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setUserID(long user_id) {
+        this.userID = user_id;
     }
 
     public String getPassword() {
@@ -64,12 +67,12 @@ public class User implements Serializable{
         this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
     }
 
     public String getUsertype() {
@@ -87,4 +90,21 @@ public class User implements Serializable{
     public void setIsTA(boolean isTA) {
         this.isTA = isTA;
     }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public boolean isTA() {
+        return isTA;
+    }
+
+    public void setTA(boolean isTA) {
+        this.isTA = isTA;
+    }
+
 }

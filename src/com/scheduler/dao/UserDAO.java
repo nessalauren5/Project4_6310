@@ -12,4 +12,8 @@ public interface UserDAO {
     public User getUserByCredentials(User user);
 
     public List<StudentPrefs> getAllStudents();
+
+    User getUser(String studentID);
+
+    public StudentPrefs getUserDetails(String id);
 }

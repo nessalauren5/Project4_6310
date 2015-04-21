@@ -11,7 +11,6 @@ import java.util.List;
  */
 public interface CourseDAO {
     public boolean setPriorityForUser(User u, CourseModel c);
-    public ArrayList<CourseModel> getCourseListForUser(User u);
-
+    public List<CourseModel> getCourseListForUser(String[] courses);
     public List<CourseModel> getAllCourses();
 }
