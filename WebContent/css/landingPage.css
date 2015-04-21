@@ -123,3 +123,7 @@ ol > li:before {
 .clearBoth {
     clear:both;
 }
+
+.jumbotron h1, .jumbotron .h1 {
+    font-size: 50px;
+}
