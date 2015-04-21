@@ -207,3 +207,7 @@ function getSem(sel) {
   var sem = document.getElementById('semester');
   sem.innerHTML = sel.value;
 }
+
+function submitList() {
+  //NESSA! HELP IS NEEDED HERE :OOOO!!!
+}

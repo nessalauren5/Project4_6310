@@ -139,7 +139,7 @@
                         <table id="RegisteredCourses" class="table" style="text-align: left">
                             <!-- this row is the metadata row -->
                           <tr class="th">
-                              <td>Program</td>
+                            <td>Program</td>
                             <td>Course #</td>
                             <td>Course Name</td>
                             <td>Add to List</td>
@@ -165,11 +165,18 @@
                                 </li>
                             </ol>
                         </div>
+                        <p>
+                            <button id="submitList" class="btn btn-primary" onclick="submitList()" style="margin-top: 5px;">
+                                Submit Preferences
+                            </button>
+                        </p>
                     </div>
+                </div>
+                <div class="thumbnail">
                     <div class="caption">
                         <p>
-                            <button id="showRecommendedSchedule" class="btn btn-primary" onclick="getRecommendedSchedule()">
-                                View Recommended Schedule
+                            <button id="showRecommendedSchedule" class="btn btn-primary" onclick="getRecommendedSchedule()" style="margin-top: 15px;">
+                                View Advised Preferences
                             </button>
                         </p>
 
