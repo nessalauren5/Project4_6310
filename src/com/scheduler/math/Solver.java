@@ -20,6 +20,7 @@ public class Solver {
 	private HashMap<String,Course> courseHashMap;
 	private HashMap<String, GRBVar> gurobiVaraibles;
 	String[][] result;
+	String[] recommendedCourses;
 	private Student TargetStudent;
 	private GRBEnv environment;
 	private GRBModel model;
@@ -59,14 +60,14 @@ public class Solver {
 	}
 	
 	@SuppressWarnings("unused")
-	private String[][] createResult() {
+	public String[] createResult() {
 		GRBVar variable;
 		String StudentID;
 		String[] Courses;
 		
 		if (errorMessage.length()>0) {
 			log.log(Level.SEVERE, errorMessage);
-			return result;
+			return recommendedCourses;
 		} else {
 			log.log(Level.INFO, TargetStudent.getStudentID() + ": Optimization was successful");
 			Courses = TargetStudent.GetCourses();
@@ -80,13 +81,14 @@ public class Solver {
 						result[i][1] = Double.toString(variable.get(GRB.DoubleAttr.X));
 						log.log(Level.INFO, Courses[i] + " " + variable.get(GRB.DoubleAttr.X));
 					}
-					return result;
+					recommendedCourses = Courses;
+					return recommendedCourses;
 				}
 			} catch (Exception e) {
 				log.log(Level.SEVERE,e.getMessage());
-				return result;
+				return recommendedCourses;
 			}
-			return result;
+			return recommendedCourses;
 		}
 	}
 	

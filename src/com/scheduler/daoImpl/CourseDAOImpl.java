@@ -1,16 +1,16 @@
 package com.scheduler.daoImpl;
 
 import com.scheduler.dao.CourseDAO;
-import com.scheduler.dbmodel.Course;
+import com.scheduler.dbmodel.CourseModel;
 import com.scheduler.dbmodel.User;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vlanderson on 4/13/15.
@@ -27,14 +27,21 @@ public class CourseDAOImpl implements CourseDAO {
     }
 
     @Transactional
-    public boolean setPriorityForUser(User u, Course c){
+    public boolean setPriorityForUser(User u, CourseModel c){
 
         return true;
     }
 
-    public ArrayList<Course> getCourseListForUser(User u){
-        ArrayList<Course> courseList = new ArrayList<Course>();
+    public ArrayList<CourseModel> getCourseListForUser(User u){
+        ArrayList<CourseModel> courseList = new ArrayList<CourseModel>();
 
         return courseList;
+    }
+
+    @Override
+    public List<CourseModel> getAllCourses() {
+        CriteriaQuery<CourseModel> c = em.getCriteriaBuilder().createQuery(CourseModel.class);
+        c.from(CourseModel.class);
+        return em.createQuery(c).getResultList();
     }
 }

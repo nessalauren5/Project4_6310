@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "users")
-@XmlRootElement(name="User")
+@XmlRootElement(name="Users")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 @org.hibernate.annotations.DynamicUpdate(value = true)
@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     @Id
-    @Column(name="STUDENTID",columnDefinition = "Integer", updatable=false, nullable=false)
+    @Column(name="StudentID",columnDefinition = "INT", updatable=false, nullable=false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long user_id;
 

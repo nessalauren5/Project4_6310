@@ -1,10 +1,14 @@
 package com.scheduler.model;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.util.ArrayList;
 
 /**
  * Created by jrao and vkodali on 4/18/15.
  */
+
+@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 public class Course {
 
     private String name;

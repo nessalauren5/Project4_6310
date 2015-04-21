@@ -1,5 +1,6 @@
 package com.scheduler.dbmodel;
 
+import com.scheduler.model.Course;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import javax.persistence.*;
@@ -12,13 +13,13 @@ import java.io.Serializable;
  * Created by vlanderson on 2/4/15.
  */
 @Entity
-@Table(name = "course")
-@XmlRootElement(name="course")
+@Table(name = "courses")
+@XmlRootElement(name="courses")
 @XmlAccessorType(XmlAccessType.FIELD)
 @JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 @org.hibernate.annotations.DynamicUpdate(value = true)
 @org.hibernate.annotations.DynamicInsert(value = true)
-public class Course implements Serializable{
+public class CourseModel implements Serializable{
 
     @Id
     @Column(name="CourseID",columnDefinition = "Integer", updatable=false, nullable=false)
@@ -31,7 +32,7 @@ public class Course implements Serializable{
     @Column(name="Major",columnDefinition = "VARCHAR(10)")
     private String program;
 
-    @Column(name= "Availability",columnDefinition = "CHAR(11)")
+    @Column(name= "Availibility",columnDefinition = "CHAR(11)")
     private String availability;
 
     public int getCourseID() {

@@ -24,7 +24,7 @@ public class CourseRecord implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recordID;
 
-    @Column(name="STUDENTID",columnDefinition = "Integer")
+    @Column(name="studentID",columnDefinition = "Integer")
     private int studentID;
 
     @Column(name="SemesterID",columnDefinition = "Integer")

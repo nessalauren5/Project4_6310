@@ -2,13 +2,16 @@ package com.scheduler.service;
 
 import com.scheduler.dao.CourseDAO;
 import com.scheduler.dao.UserDAO;
-import com.scheduler.dbmodel.Course;
-import com.scheduler.dbmodel.ResultObject;
-import com.scheduler.dbmodel.User;
+import com.scheduler.dbmodel.*;
+import com.scheduler.math.Solver;
+import com.scheduler.model.Course;
+import com.scheduler.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by vlanderson on 4/13/15.
@@ -27,17 +30,18 @@ public class BusinessService {
         ResultObject<User> response = new ResultObject<User>();
         User u = userdao.getUserByCredentials(user);
 
-        if(u==null){
+        if(u==null || !user.getPassword().equals(user.getPassword())){
             response.setStatus("failed");
         }
-        else{
+        else {
             response.setStatus("success");
+            response.setObject(u);
         }
         return response;
     }
 
-    public ResultObject<Course> setCourseForUser(User user, Course c){
-        ResultObject<Course> response = new ResultObject<Course>();
+    public ResultObject<CourseModel> setCourseForUser(User user, CourseModel c){
+        ResultObject<CourseModel> response = new ResultObject<CourseModel>();
 
         if(coursedao.setPriorityForUser(user, c)){
             response.setStatus("success");
@@ -49,8 +53,8 @@ public class BusinessService {
         return response;
     }
 
-    public ResultObject<ArrayList<Course>> getCourseList(User user){
-        ResultObject<ArrayList<Course>> response = new ResultObject<ArrayList<Course>>();
+    public ResultObject<ArrayList<CourseModel>> getCourseList(User user){
+        ResultObject<ArrayList<CourseModel>> response = new ResultObject<ArrayList<CourseModel>>();
         response.setObject(coursedao.getCourseListForUser(user));
         if(response.getObject()!=null){
             response.setStatus("success");
@@ -58,6 +62,46 @@ public class BusinessService {
         else{
             response.setStatus("failed");
         }
+        return response;
+    }
+
+    public ResultObject< ArrayList<Course>> generateRecommendationFor(String studentID) {
+
+        List<StudentPrefs> stuList = userdao.getAllStudents();
+        List<CourseModel> courseList = coursedao.getAllCourses();
+
+
+        HashMap<String,Student> students = new HashMap<>();
+        HashMap<String,Course> courses = new HashMap<>();
+
+        for(StudentPrefs p : stuList){
+            Student s = new Student();
+            s.setCredits(p.getCredits());
+            s.setStudentID(String.valueOf(p.getStudentID()));
+            s.setStudentPreferences(p.getCourseStr());
+
+            students.put(s.getStudentID(),s);
+        }
+        for(CourseModel cm : courseList){
+            Course c = new Course(String.valueOf(cm.getCourseID()), cm.getName());
+
+            courses.put(c.getCourseID(),c);
+        }
+
+        Solver solv = new Solver(students,courses,studentID);
+        solv.optimize();
+
+        String[] coursesTaken = solv.createResult();
+        ArrayList<Course> takenList = new ArrayList<>();
+
+        for(String s : coursesTaken){
+            Course c = courses.get(s);
+            takenList.add(c);
+        }
+
+
+        ResultObject<ArrayList<Course>> response = new ResultObject<ArrayList<Course>>();
+        response.setObject(takenList);
         return response;
     }
 }

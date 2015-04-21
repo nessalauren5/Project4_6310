@@ -1,6 +1,7 @@
 package com.scheduler.dbmodel;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,34 +12,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Created by vlanderson on 4/18/15.
  */
 @Entity
-@Table(name = "studentpreferences")
-@XmlRootElement(name="studentpreferences")
-@XmlAccessorType(XmlAccessType.FIELD)
-@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
-@org.hibernate.annotations.DynamicUpdate(value = true)
+@Immutable
+@Table(name = "studentinfo")
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 public class StudentPrefs {
 
     @Id
-    @Column(name="prefID",columnDefinition = "INT", updatable=false, nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int recordID;
-
-    @Column(name="STUDENTID",columnDefinition = "INT")
+    @Column(name="StudentID",columnDefinition = "INT")
     private int studentID;
 
-    @Column(name="SemesterID",columnDefinition = "Integer")
-    private int semesterID;
-
-    @Column(name="numberOfCourses",columnDefinition = "INT")
+    @Column(name="NumberCourses",columnDefinition = "INT")
     private int numCourses;
 
-    public int getRecordID() {
-        return recordID;
-    }
+    @Column(name="CList", columnDefinition = "VARCHAR(250)")
+    private String courseStr;
 
-    public void setRecordID(int recordID) {
-        this.recordID = recordID;
-    }
+    @Column(name = "CreditsEarned")
+    private int credits;
 
     public int getStudentID() {
         return studentID;
@@ -48,13 +38,7 @@ public class StudentPrefs {
         this.studentID = studentID;
     }
 
-    public int getSemesterID() {
-        return semesterID;
-    }
 
-    public void setSemesterID(int semesterID) {
-        this.semesterID = semesterID;
-    }
 
     public int getNumCourses() {
         return numCourses;
@@ -62,5 +46,21 @@ public class StudentPrefs {
 
     public void setNumCourses(int numCourses) {
         this.numCourses = numCourses;
+    }
+
+    public String getCourseStr() {
+        return courseStr;
+    }
+
+    public void setCourseStr(String courseStr) {
+        this.courseStr = courseStr;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 }

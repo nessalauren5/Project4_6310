@@ -20,8 +20,11 @@ public class Student {
 		}
 	}
 	
-	public void SetCredits(String Credits) {
-		credits = Integer.parseInt(Credits) + 1;
+//	public void SetCredits(String Credits) {
+//		credits = Integer.parseInt(Credits) + 1;
+//	}
+	public void setCredits(int credits) {
+		this.credits = credits;
 	}
 	
 	public int GetCredits() {
