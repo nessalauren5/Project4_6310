@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2015 at 04:44 AM
+-- Generation Time: Apr 21, 2015 at 05:07 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -9029,11 +9029,15 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
-(53035889, '', '', '', '', 'Student', 0),
-(53042193, '', '', '', '', 'Student', 0),
-(53052056, '', '', '', '', 'Student', 0),
-(53057225, '', '', '', '', 'Student', 0),
-(53057743, '', '', '', '', 'Student', 0),
+(12345, 'admin', 'admin', '', '', 'Administrator', 0),
+(23456, 'Professor', 'feron', '', '', 'Professor', 0),
+(67890, 'burger', 'king', '', '', 'Administrator', 0),
+(456789, 'Stephen', 'Hawking', '', '', 'Professor', 0),
+(53035889, 'test', 'password', '', '', 'Student', 1),
+(53042193, 'tester', 'mctest', '', '', 'Student', 0),
+(53052056, 'foo', 'bar', '', '', 'Student', 0),
+(53057225, 'bob', 'mcbob', '', '', 'Student', 0),
+(53057743, 'joe', 'smo', '', '', 'Student', 0),
 (53057901, '', '', '', '', 'Student', 0),
 (53057956, '', '', '', '', 'Student', 0),
 (53058793, '', '', '', '', 'Student', 0),
@@ -10268,15 +10272,15 @@ INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName
 (55980089, '', '', '', '', 'Student', 0),
 (55980097, '', '', '', '', 'Student', 0),
 (55980099, '', '', '', '', 'Student', 0),
-(55980102, '', '', '', '', 'Student', 0),
+(55980102, '', '', '', '', 'Student', 0);
+INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
 (55980106, '', '', '', '', 'Student', 0),
 (55980107, '', '', '', '', 'Student', 0),
 (55980128, '', '', '', '', 'Student', 0),
 (55980190, '', '', '', '', 'Student', 0),
 (55980204, '', '', '', '', 'Student', 0),
 (55980211, '', '', '', '', 'Student', 0),
-(55980216, '', '', '', '', 'Student', 0);
-INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
+(55980216, '', '', '', '', 'Student', 0),
 (55980217, '', '', '', '', 'Student', 0),
 (55980232, '', '', '', '', 'Student', 0),
 (55980259, '', '', '', '', 'Student', 0),
@@ -11516,15 +11520,15 @@ INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName
 (56057354, '', '', '', '', 'Student', 0),
 (56057357, '', '', '', '', 'Student', 0),
 (56057358, '', '', '', '', 'Student', 0),
-(56057360, '', '', '', '', 'Student', 0),
+(56057360, '', '', '', '', 'Student', 0);
+INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
 (56057362, '', '', '', '', 'Student', 0),
 (56057363, '', '', '', '', 'Student', 0),
 (56057366, '', '', '', '', 'Student', 0),
 (56057372, '', '', '', '', 'Student', 0),
 (56057374, '', '', '', '', 'Student', 0),
 (56057376, '', '', '', '', 'Student', 0),
-(56057680, '', '', '', '', 'Student', 0);
-INSERT INTO `users` (`StudentID`, `username`, `password`, `firstName`, `lastName`, `UserType`, `IsTA`) VALUES
+(56057680, '', '', '', '', 'Student', 0),
 (56057724, '', '', '', '', 'Student', 0),
 (56057726, '', '', '', '', 'Student', 0),
 (56057728, '', '', '', '', 'Student', 0),
