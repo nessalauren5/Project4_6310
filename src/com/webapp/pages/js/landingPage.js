@@ -82,6 +82,17 @@ $(document).ready(function(){
     }
   });
 
+  //Priority List Remove Row
+  var listItems = document.getElementsByTagName("li");  
+  for (var i = 0; i < listItems.length; i++) {
+    listItems[i].onclick = function() {
+      if (confirm('Are you sure you want to remove this course?')) {
+        this.parentNode.removeChild(this);
+      } else {
+        // Do nothing!
+      }
+    };
+  }
 
   function loadPage(user){
     if(user){
@@ -161,7 +172,14 @@ function addClass(x) {
   {
     var list = document.getElementById('priorityList');
     var entry = document.createElement('li');
-    entry.setAttribute('class', 'sortable-item ui-sortable-handle')
+    entry.setAttribute('class', 'sortable-item ui-sortable-handle');
+    entry.onclick = function() {
+      if (confirm('Are you sure you want to remove this course?')) {
+        this.parentNode.removeChild(this);
+      } else {
+        // Do nothing!
+      }
+    };
     var newSpan = document.createElement('span');
     entry.appendChild(newSpan);
     newSpan.innerHTML = selectedText;
