@@ -70,7 +70,7 @@ $(document).ready(function(){
   function loadCourseList(list){
     if(list && list.length>0){
       $.each(list, function(key, course) {
-        $("#RegisteredCourses").append("<tr id='" + course.courseID + "'><<td>" + course.program+ "</td> <td>" + course.courseID + "</td><td>" + course.name + "</td><td style='text-align: center'> <button class='btn btn-primary' onclick='addClass(" + course.courseID+")'>+</button></td></tr>");
+        $("#RegisteredCourses").append("<tr id='" + course.courseID + "'><<td>" + course.program+ "</td> <td>" + course.courseID + "</td><td>" + course.name + "</td><td style='text-align: center'> <button class='btn btn-primary' onclick='courseDetails(" + course.courseID+")'>+</button></td></tr>");
       });
     }
   }
@@ -80,4 +80,9 @@ $(document).ready(function(){
 function getSem(sel) {
   var sem = document.getElementById('semester');
   sem.innerHTML = sel.value;
+}
+
+function courseDetails(x) {
+  var rowData = document.getElementById("course"+x);
+  //Course details AJAX goes here.................
 }
