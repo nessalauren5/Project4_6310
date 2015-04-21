@@ -84,5 +84,8 @@ function getSem(sel) {
 
 function courseDetails(x) {
   var rowData = document.getElementById("course"+x);
+  //Show Course Details
+  document.getElementById("CourseDetails").style.display = '';
+  event.preventDefault();
   //Course details AJAX goes here.................
 }
