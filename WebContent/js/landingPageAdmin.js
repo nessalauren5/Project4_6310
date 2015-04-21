@@ -22,8 +22,6 @@ $(document).ready(function(){
     return b;
   })(window.location.search.substr(1).split('&'))
 
-
-
   var id = $.QueryString["id"];
 
   var creds = {};

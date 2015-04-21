@@ -1,6 +1,17 @@
 $(document).ready(function(){
   $('.sortable-list').sortable();
 
+  /*
+  //Here is my attempt to show the link when the r is 0
+  //Also, we need to add to the link all the URL parameters (id and r)
+  var field = 'r';
+  var url = window.location.href;
+  console.log(url.indexOf('&' + field + '=') != '0');
+  if(url.indexOf('&' + field + '=') != '0') {
+    document.getElementById('TA').style.display = '';
+    event.preventDefault();
+  }*/
+
   var $loading = $('#loadingDiv').hide();
   $(document)
       .ajaxStart(function () {
@@ -21,8 +32,6 @@ $(document).ready(function(){
     }
     return b;
   })(window.location.search.substr(1).split('&'))
-
-
 
   var id = $.QueryString["id"];
 
