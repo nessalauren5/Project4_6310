@@ -18,7 +18,8 @@
                 <div class="account-wall">
                     <img class="profile-img" src="img/gatech.png"
                         alt="">
-                    <form class="form-signin" action="landingPage.html" onsubmit="login();">
+                    <!-- Change this action to go to the correct landing page depending on the user -->
+                    <form class="form-signin" action="landingPageStudent.html" onsubmit="login();">
                     <input type="text" class="form-control" placeholder="Email" required autofocus>
                     <input type="password" class="form-control" placeholder="Password" required>
                     <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">
@@ -32,6 +33,15 @@
                 <!-- <a href="#" class="text-center new-account">Create an account </a>dont think this is needed for our app -->
             </div>
         </div>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12"><center>
+                    <p>Image Copyright &copy; GEORGIA INSTITUTE OF TECHNOLOGY ® 2015</p>
+                    <p>Copyright &copy; Keith Adler 2015</p></center>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
