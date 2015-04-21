@@ -120,8 +120,10 @@
                                 <td>Course Name</td>
                                 <td>View Course Details</td>
                               </tr>
-                              <!-- Loop over these rows, fill in 1/2/3/4/5 with a counter variable -->
-                              <!-- Set rows with 0 to class="text-red" set rows with above 0 to class="text-green" -->
+                              <!-- Loop over these rows, fill in 1/2/3/4/5 with a counter variable.-->
+                              <!-- The CourseDetails section will use a JS function to view details of that Course-->
+                              <!-- The Admin can view ALL courses for a given semester, regardless of professors and TAs-->
+                              <!-- Use a 'show' function similar to what we did for view recommended schedule, but this time it shows the course details that are currently hidden-->
                             </table>
                         </div>
                     </div>
@@ -131,24 +133,27 @@
                     <div class="thumbnail">
                         <div class="caption">
                             <h3>Course Details</h3>
-                            <table id="CourseDetails" class="table" style="text-align: left; display:none;">
+                            <table id="CourseDetails" class="table" style="text-align: left; display: none;">
                               <tr class="th">
+                                <td>Course Name</td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>[CourseName]</td>
                               </tr>
                               <tr>
+                                <td>Course Limit</td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><input type="text" class="form-control" id="courseLimit" value="250" style="width: 60px;"></td>
                               </tr>
                               <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>Professor</td>
+                                <td>[Name]</td>
+                                 <!--Classes with more than one professor, or lab professor if not a TA below -->
+                                <td><button class='btn btn-primary' onclick='addTA(' + course.courseID+')'>+</button></td>
+                              </tr>
+                              <tr>
+                                <td>TA</td>
+                                <td>[Name]</td>
+                                <td><button class='btn btn-primary' onclick='addTA(' + course.courseID+')'>+</button></td></td>
                               </tr>
                             </table>
                         </div>
