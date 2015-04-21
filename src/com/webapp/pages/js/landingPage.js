@@ -1,6 +1,17 @@
 $(document).ready(function(){
   $('.sortable-list').sortable();
 
+  /*
+  //Here is my attempt to show the link when the r is 0
+  //Also, we need to add to the link all the URL parameters (id and r)
+  var field = 'r';
+  var url = window.location.href;
+  console.log(url.indexOf('&' + field + '=') != '0');
+  if(url.indexOf('&' + field + '=') != '0') {
+    document.getElementById('TA').style.display = '';
+    event.preventDefault();
+  }*/
+
   var $loading = $('#loadingDiv').hide();
   $(document)
       .ajaxStart(function () {
@@ -21,8 +32,6 @@ $(document).ready(function(){
     }
     return b;
   })(window.location.search.substr(1).split('&'))
-
-
 
   var id = $.QueryString["id"];
 
@@ -87,7 +96,7 @@ $(document).ready(function(){
   function loadCourseList(list){
     if(list && list.length>0){
       $.each(list, function(key, course) {
-        $("#RegisteredCourses").append("<tr id='" + course.courseID + "'><<td>" + course.program+ "</td> <td id='course'>" + course.courseID + "</td><td id='name'>" + course.name + "</td><td style='text-align: center'> <button class='btn btn-primary' onclick='addClass(" + course.courseID+")'>+</button></td></tr>");
+        $("#RegisteredCourses").append("<tr id='" + course.courseID + "'><<td>" + course.program+ "</td> <td>" + course.courseID + "</td><td>" + course.name + "</td><td style='text-align: center'> <button class='btn btn-primary' onclick='addClass(" + course.courseID+")'>+</button></td></tr>");
       });
     }
   }
@@ -104,13 +113,10 @@ $(document).ready(function(){
 });
 
 function getRecommendedSchedule() {
-  var uri = "http://localhost:8080/services/";
-
-  //
-  if ($('#preferences').is(":visible"))
+  if ((document.getElementById("recommendedSchedule").style.display == 'none'))
   {
     //Call to retrieve list
-    var courses = [];
+    var courses = {};
 
     $('.priority').each(function(key, course) {
       courses.push(course.id);
@@ -126,53 +132,57 @@ function getRecommendedSchedule() {
       contentType: "application/json",
       dataType:"json",
       success : function(data) {
-        loadSuggestions(data.result);
         console.log(data.result);
       },
       error: function (request, error) {
         alert(" Can't do because: " + error);
       }
     });
+
+    //Populate list
+
+    //List Toggle
+    document.getElementById("recommendedSchedule").style.display = ''
+    event.preventDefault()
   }
   else
   {
-    $('#toggleBtn').text("View Recommendations");
-   $("#suggestList").html("");
-    $('#preferences').show();
-    $('#suggestions').hide();
+    //List Toggle
+    document.getElementById("recommendedSchedule").style.display = 'none';
+    event.preventDefault()
   }
 }
 
-function loadSuggestions(courses){
-
-  if(courses && courses.length>0){
-    $.each(courses, function(key, course) {
-      $("#courseList").append("<li class='sortable-item'> <span id='" + course.courseID + "' class='priority' >" + course.courseID + ":" +  course.name + "</span> </li>");
-
-    });
-    $('#toggleBtn').text("Change Course Preferences");
-    $('#preferences').hide();
-    $('#suggestions').show();
-  }
-}
 function addClass(x) {
-  var rowData = $('tr#'+x);
-  var course = rowData.find('td#course').text();
-  var name = rowData.find('td#name').text();
+  var rowData = document.getElementById("course"+x);
+  var selectedText = rowData.cells[0].innerHTML + ': ' + rowData.cells[1].innerHTML;
 
-  if(!checkClassDuplicate(course)) //add a check to see if class is already taken and AND it here.
+  if(checkClassDuplicate(selectedText)) //add a check to see if class is already taken and AND it here.
   {
-    $("#priorityList").append("<li class='sortable-item'> <span id='" + course + "' class='priority' >" + course + ":" +  name + "</span> </li>");
+    var list = document.getElementById('priorityList');
+    var entry = document.createElement('li');
+    entry.setAttribute('class', 'sortable-item ui-sortable-handle')
+    var newSpan = document.createElement('span');
+    entry.appendChild(newSpan);
+    newSpan.innerHTML = selectedText;
+    list.appendChild(entry);
   }
 }
 
 function checkClassDuplicate(x) {
-  $('.priority').each(function(key, course) {
-    if(course.id == x)
-      return true;
-  });
+  var list = document.getElementById('priorityList');
+  var listItem = list.getElementsByTagName("span");
+  var newNums   = [],
+      duplicate = [];
 
-  return false;
+  for (var i=0; i < listItem.length; i++) {
+    var num = listItem[i].innerHTML;
+    if (num === x) {
+      alert("" + x + " is a duplicate class");
+      return false;
+    }
+  }
+  return true;
 }
 
 function getSem(sel) {

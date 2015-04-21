@@ -22,7 +22,7 @@ var uri = "http://localhost:8080/services/";
 			data: JSON.stringify({username:usr,password:pwd}),
 			success : function(data) {
 				console.log(data);
-				$(location).attr('href',"/landingPage"+data.result.usertype+".html?id="+data.result.userID);
+				$(location).attr('href',"/landingPage"+data.result.usertype+".html?id="+data.result.userID+"&r="+data.result.isTa);
 			},
 			error: function (request, error) {
        		 console.log(arguments);
