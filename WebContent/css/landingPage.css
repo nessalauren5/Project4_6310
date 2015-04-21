@@ -103,3 +103,19 @@ ol > li:before {
     font-weight:bold;
     text-align:center;
 }
+
+.btn-primary {
+    margin-bottom: 5px;
+}
+
+.courseNumber {
+    color: #428bca;
+}
+
+.text-green {
+    color: green;
+}
+
+.text-red {
+    color: red;
+}
