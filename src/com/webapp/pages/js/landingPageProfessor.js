@@ -11,11 +11,12 @@ $(document).ready(function(){
       b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
     }
     return b;
-  })(window.location.search.substr(1).split('&'))
+  })(window.location.search.substr(1).split('&'));
 
   //Here is my attempt to show the link when the r is 0
   //Also, we need to add to the link all the URL parameters (id and r)
   var field = 'r';
+  var url = window.location.href;
   var r =  $.QueryString["r"];
   if(r == 'true') {
     document.getElementById('TA').style.display = '';
@@ -50,7 +51,7 @@ $(document).ready(function(){
       var TA = data.result.isTA ? "true":"false";
 
       loadPage(data.result);
-      document.getElementById("TA").href="landingPageStudent.html?id="+data.result.userID+"&r="+TA;
+      document.getElementById("TA").href="landingPageStudent.html?id="+data.result.userID+"&r=true";
     },
     error: function (request, error) {
       alert(" Can't do because: " + error);

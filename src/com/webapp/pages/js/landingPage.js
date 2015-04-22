@@ -13,7 +13,8 @@ $(document).ready(function(){
     return b;
   })(window.location.search.substr(1).split('&'));
 
-
+  //Here is my attempt to show the link when the r is 0
+  //Also, we need to add to the link all the URL parameters (id and r)
   var field = 'r';
   var url = window.location.href;
   var r =  $.QueryString["r"];
@@ -53,7 +54,7 @@ $(document).ready(function(){
     success : function(data) {
       var TA = data.result.isTA ? "true":"false";
       loadPage(data.result);
-      document.getElementById("TA").href="landingPageProfessor.html?id="+data.result.userID+"&r="+TA;
+      document.getElementById("TA").href="landingPageProfessor.html?id="+data.result.userID+"&r=true";
     },
     error: function (request, error) {
       alert(" AJAX ERROR ");
