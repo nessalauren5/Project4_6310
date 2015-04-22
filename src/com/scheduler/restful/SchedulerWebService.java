@@ -1,7 +1,7 @@
 package com.scheduler.restful;
 
 import com.scheduler.dbmodel.ResultObject;
-import com.scheduler.dbmodel.StudentPrefs;
+import com.scheduler.dbmodel.StudentInfoView;
 import com.scheduler.dbmodel.User;
 import com.scheduler.dbmodel.CourseModel;
 import com.scheduler.model.Course;
@@ -9,9 +9,6 @@ import com.scheduler.service.BusinessService;
 import javassist.bytecode.stackmap.TypeData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -39,8 +36,8 @@ public class SchedulerWebService {
 	@Consumes("application/json")
 	@Produces("application/json")
 	@Path("recc/{studentID}/{numCourses}")
-	public Response getRecommendation(@PathParam(value = "studentID") String studentID, @PathParam(value = "numCourses") String numCourses){
-		ResultObject<ArrayList<Course>> resp = bs.generateRecommendationFor(studentID, numCourses);
+	public Response getRecommendation(@PathParam(value = "studentID") String studentID, @PathParam(value = "numCourses") String numCourses, StudentInfoView sp){
+		ResultObject<ArrayList<Course>> resp = bs.generateRecommendationFor(studentID, numCourses, sp);
 		return Response.ok(resp, MediaType.APPLICATION_JSON).build();
 	}
 
@@ -72,10 +69,10 @@ public class SchedulerWebService {
 	@Path("user/{studentID}")
 	public Response getUser(@PathParam(value = "studentID") String studentID){
 		try {
-			ResultObject<StudentPrefs> res = bs.getUser(studentID);
+			ResultObject<StudentInfoView> res = bs.getUser(studentID);
 			return Response.ok(res, MediaType.APPLICATION_JSON).build();
 		}catch(Exception e){
-			ResultObject<StudentPrefs> res = new ResultObject<>();
+			ResultObject<StudentInfoView> res = new ResultObject<>();
 			res.addError("error, user data corrupt.");
 			return Response.ok(res, MediaType.APPLICATION_JSON).build();
 		}
@@ -90,6 +87,7 @@ public class SchedulerWebService {
 			ResultObject<User> res = bs.authUser(user);
 			return Response.ok(res, MediaType.APPLICATION_JSON).build();
 		}catch(Exception e){
+			log.log(Level.SEVERE, e.toString());
 			ResultObject<User> res = new ResultObject<>();
 			return Response.ok(res, MediaType.APPLICATION_JSON).build();
 		}

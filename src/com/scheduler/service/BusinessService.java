@@ -89,7 +89,7 @@ public class BusinessService {
 
     public ResultObject<List<CourseModel>> getPriorityList(String studentID){
         log.log(Level.INFO, "Retrieving priority course list for " + studentID);
-        StudentPrefs sp = userdao.getUserDetails(studentID);
+        StudentInfoView sp = userdao.getUserDetails(studentID);
         String [] courses = sp.getCourseStr().split(",");
 
         ResultObject<List<CourseModel>> response = new ResultObject<List<CourseModel>>();
@@ -120,14 +120,23 @@ public class BusinessService {
         return response;
     }
 
-    public ResultObject< ArrayList<Course>> generateRecommendationFor(String studentID, String numCourses) {
+    public ResultObject< ArrayList<Course>> generateRecommendationFor(String studentID, String numCourses, StudentInfoView sp) {
+
+        ResultObject<ArrayList<Course>> response = new ResultObject<ArrayList<Course>>();
+
+
         if(numCourses.isEmpty()){
             numCourses = "2";
         }
-        log.log(Level.INFO, "User " + studentID + " is requesting course recommendation.");
-        List<StudentPrefs> stuList = userdao.getAllStudents();
+        log.log(Level.INFO, "User " + studentID + " is requesting course recommendation." + sp.getCourseStr());
+        List<StudentInfoView> stuList = userdao.getAllStudents();
+        try{
+            userdao.setCoursePreferences(studentID,sp.getCourseStr());
+        }catch(Exception e){
+            log.log(Level.SEVERE, "Error updating preferences" + e.getMessage());
+        }
 
-        for(StudentPrefs pf :stuList){
+        for(StudentInfoView pf :stuList){
             if(pf.getUserIDStr().equals(studentID)){
                 pf.setNumCourses(Integer.parseInt(numCourses));
             }
@@ -139,7 +148,7 @@ public class BusinessService {
         HashMap<String,Student> students = new HashMap<>();
         HashMap<String,Course> courses = new HashMap<>();
 
-        for(StudentPrefs p : stuList){
+        for(StudentInfoView p : stuList){
             Student s = new Student();
             s.setCredits(p.getCredits());
             s.setStudentID(String.valueOf(p.getUserID()));
@@ -159,26 +168,32 @@ public class BusinessService {
         String[] coursesTaken = solv.createResult();
         ArrayList<Course> takenList = new ArrayList<>();
 
-        for(String s : coursesTaken){
-            Course c = courses.get(s);
-            takenList.add(c);
+        if(coursesTaken==null || coursesTaken.length==0){
+            response.setStatus("failed");
+            response.setMessage("Course(s) unavailable for you in the next semester. Please try again with different preferencs.");
+        }
+        else {
+            for (String s : coursesTaken) {
+                Course c = courses.get(s);
+                takenList.add(c);
+            }
         }
 
 
-        ResultObject<ArrayList<Course>> response = new ResultObject<ArrayList<Course>>();
+
         response.setObject(takenList);
         return response;
     }
 
-    public ResultObject<StudentPrefs> getUser(String studentID) {
+    public ResultObject<StudentInfoView> getUser(String studentID) {
         log.log(Level.INFO," finding user details: " + studentID );
-        ResultObject<StudentPrefs> response;
+        ResultObject<StudentInfoView> response;
         try{
-            StudentPrefs u = userdao.getUserDetails(studentID);
-             response = new ResultObject<StudentPrefs>();
+            StudentInfoView u = userdao.getUserDetails(studentID);
+             response = new ResultObject<StudentInfoView>();
             response.setObject(u);
         }catch(NoResultException e){
-           response = new ResultObject<StudentPrefs>();
+           response = new ResultObject<StudentInfoView>();
             response.addError("No user found with that ID.");
         }
         return response;

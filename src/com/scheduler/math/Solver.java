@@ -86,11 +86,14 @@ public class Solver {
 						if (variable.get(GRB.DoubleAttr.X) == 1)
 							rC.add(Courses[i].toString());
 					}
+					recommendedCourses = new String[rC.size()];
+					
 					for (int i=0;i< rC.size();i++) {
 						recommendedCourses[i] = rC.get(i);
 					}
 					return recommendedCourses;
 				}
+			
 			} catch (Exception e) {
 				log.log(Level.SEVERE,e.getMessage());
 				return recommendedCourses;

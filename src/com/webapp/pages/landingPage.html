@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Student Registration Access Page</title>
+    <title>Registration Access Page</title>
     <!--jQuery CSS -->
     <link href="css/jquery-ui.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
     <link href="css/landingPage.css" rel="stylesheet">
 
     <!--jQuery-->
-    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -34,7 +34,6 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <a id="semester" class="navbar-brand navbar-right">Fall 2015</a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -51,12 +50,10 @@
                         <a href="index.html">Logout</a>
                     </li>
                     <li>
-                        <a id="TA" href="landingPageProfessor.html" style="display: none;">Professors and TAs</a>
-
+                        <a href="#"></a>
                     </li>
                     <li>
-                        <a href="landingPageAdministrator.html" style="display: none;">Administrators and Developers</a>
-
+                        <a href="#"></a>
                     </li>
                 </ul>
             </div>
@@ -68,22 +65,23 @@
 
         <!-- Jumbotron Header -->
         <header class="jumbotron hero-spacer">
-            <h1 style="display:inline;">Welcome <span id="fname">[First Name]</span>  <span id="lname">[Last Name]</span>!</h1>
+            <h1 style="display:inline;">Welcome [name]!</h1>
+            <h3 style="display:inline; float: right;"> Fall 2015 </h3>
             <div class="imgAndInfoContainer">
                 <img class="imgAndInfo" src="img/profilePhoto.png" alt="">
                 <div class="imgAndInfoText col-md-2">
                     <div class="imgAndInfoRow">
-
+                        <p id="fname" class="imgAndInfo">First Name</p>
+                        <p id="lname" class="imgAndInfo">Last Name</p>
                         <p class="imgAndInfo"></p>
                     </div>
                     <div class="imgAndInfoRow">
-                        <p class="imgAndInfo clearBoth">GTID: </p>
-                        <p id="gtid" class="imgAndInfo">[1234567890]</p>
+                        <p class="imgAndInfo">GTID: </p>
+                        <p id="gtid" class="imgAndInfo">1234567890</p>
                     </div>
-                    <img src="img/loading.gif" id="loadingDiv" style="display: none">
                     <div class="imgAndInfoRow">
-                        <p class="imgAndInfo clearBoth">Desired Courseload: </p>
-                        <select class="selectpicker imgAndInfo" id="courseload">
+                        <p class="imgAndInfo">Desired Courseload: </p>
+                        <select class="selectpicker imgAndInfo">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -95,8 +93,8 @@
 
                 <div class="imgAndInfoText2 col-md-2">
                     <div class="imgAndInfoRow">
-                        <p class="imgAndInfo clearBoth">Semester: </p>
-                        <select id="semesterMethod" onchange="getSem(this);" class="selectpicker imgAndInfo">
+                        <p class="imgAndInfo">Semester: </p>
+                        <select class="selectpicker imgAndInfo">
                             <option value="Fall 2015">Fall 2015</option>
                             <option value="Spring 2016">Spring 2016</option>
                             <option value="Summer 2016">Summer 2016</option>
@@ -104,17 +102,9 @@
                         </select>
                     </div>
                     <div class="imgAndInfoRow">
-                        <p class="imgAndInfo clearBoth">Major: </p>
-                        <select class="selectpicker imgAndInfo">
-                            <option value="Computer Science">Computer Science</option>
-                            <option value="IT Management Science">IT Management Science</option>
-                            <option value="Computer Engineering">Computer Engineering</option>
-                            <option value="Software Engineering">Software Engineering</option>
-                        </select>
+                        <a href="http://assets.diylol.com/hfs/53e/2e0/d3d/resized/creepy-willy-wonka-meme-generator-you-must-be-very-excited-about-the-schedule-dd7a01.jpg" class="imgAndInfo">View Recommended Schedule</a>
                     </div>
                     <div class="imgAndInfoRow">
-                        <p class="imgAndInfo clearBoth">Hours Completed: </p>
-                        <p id="hours" class="imgAndInfo">12</p>
                     </div>
                 </div>
             </div>
@@ -125,9 +115,7 @@
         <!-- Title -->
         <div class="row">
             <div class="col-lg-12">
-                <center>
-                    <h3>Course Catalog and Preferences</h3>
-                </center>
+                <h3>Course Schedule and Preferences</h3>
             </div>
         </div>
 
@@ -137,45 +125,39 @@
             <div class="col-md-6 col-sm-12 hero-feature">
                 <div class="thumbnail">
                     <div class="caption">
-                        <h3>Course Catalog</h3>
-                        <table id="RegisteredCourses" class="table" style="text-align: left">
-                            <!-- this row is the metadata row -->
-                          <tr class="th">
-                              <td>Program</td>
-                            <td>Course #</td>
-                            <td>Course Name</td>
-                            <td>Add to List</td>
-                          </tr>
-                          <!-- Loop over these rows, fill in 1/2/3/4/5 with a counter variable -->
-                          <!-- Set rows with 0 to class="text-red" set rows with above 0 to class="text-green" -->
-                        </table>
+                        <h3>Current Course Schedule</h3>
+                        <p>
+                            <a href="http://assets.diylol.com/hfs/53e/2e0/d3d/resized/creepy-willy-wonka-meme-generator-you-must-be-very-excited-about-the-schedule-dd7a01.jpg">
+                                View Recommended Schedule
+                            </a>
+                        </p>
+                        <p>
+                            <a href="http://www.randomdoggiegenerator.com/" class="btn btn-primary">Click for some dank puppies</a> <a href="http://assets.scumbagsteve.com/hashed_silo_content/c8c/cb9/45e/resized/gives-need-more-information-as-an-answer-choice-really-wants-you-to-choose-from-the-others-instead-961efb.jpg" class="btn btn-default">More Info</a>
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-sm-12 hero-feature">
-                <div class="thumbnail"  >
-                    <div class="caption" id="preferences">
+                <div class="thumbnail">
+                    <div class="caption">
                         <h3>Course Preferences</h3>
                         <div class="thumbnail">
-                            <ol id="priorityList" class="sortable-list">
+                            <ol class="sortable-list">
+                                <li class="sortable-item">
+                                    <span>6310: SAP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>7367 KBAI</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>6300: SDP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>6601 AI</span>
+                                </li>
                             </ol>
                         </div>
-                    </div>
-                    <div class="caption" id="suggestions" style="display:none;">
-                        <h3>Fall 2015 Approved Courses</h3>
-                        <div class="thumbnail">
-                            <ol id="courseList" class="sortable-list">
-                            </ol>
-                        </div>
-                    </div>
-                    <div class="caption">
-                        <p>
-                            <button id="toggleBtn" class="btn btn-primary" onclick="getRecommendedSchedule()" style="margin-top: 15px;">
-                                View Advised Schedule</button>
-                        </p>
-
-
                     </div>
                 </div>
             </div>
@@ -186,10 +168,8 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12 center">
-                    <center>
-                        <p>Copyright &copy; Keith Adler 2015</p>
-                    </center>
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Keith Adler 2015</p>
                 </div>
             </div>
         </footer>

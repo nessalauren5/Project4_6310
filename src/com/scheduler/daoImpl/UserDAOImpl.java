@@ -1,10 +1,12 @@
 package com.scheduler.daoImpl;
 
 import com.scheduler.dao.UserDAO;
-import com.scheduler.dbmodel.StudentPrefs;
+import com.scheduler.dbmodel.StudentInfoView;
+import com.scheduler.dbmodel.StudentPreferences;
 import com.scheduler.dbmodel.User;
-import com.scheduler.model.Student;
 import javassist.bytecode.stackmap.TypeData;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
@@ -12,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.logging.Level;
@@ -39,14 +42,26 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Transactional
-    public StudentPrefs getUserDetails(String id){
+    public void setCoursePreferences(String user, String courses) {
+        log.log(Level.INFO, "User " + user + " is updating course preferences to: " + courses);
         CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<StudentPrefs> cq = cb.createQuery(StudentPrefs.class);
-        Root<StudentPrefs> c = cq.from(StudentPrefs.class);
-        cq.select(c).where(cb.equal(c.get("userID"), id));
-        TypedQuery<StudentPrefs> query = em.createQuery(cq);
+        CriteriaUpdate<StudentPreferences> cq = cb.createCriteriaUpdate(StudentPreferences.class);
+        Root<StudentPreferences> c = cq.from(StudentPreferences.class);
+        cq.set(c.get("courseStr"), courses).where(cb.equal(c.get("studentID"),user));
+        em.createQuery(cq).executeUpdate();
+    }
 
-        StudentPrefs found = query.getSingleResult();
+
+
+    @Transactional
+    public StudentInfoView getUserDetails(String id){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<StudentInfoView> cq = cb.createQuery(StudentInfoView.class);
+        Root<StudentInfoView> c = cq.from(StudentInfoView.class);
+        cq.select(c).where(cb.equal(c.get("userID"), id));
+        TypedQuery<StudentInfoView> query = em.createQuery(cq);
+
+        StudentInfoView found = query.getSingleResult();
         return found;
     }
 
@@ -64,10 +79,10 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<StudentPrefs> getAllStudents() {
+    public List<StudentInfoView> getAllStudents() {
         log.log(Level.INFO,"Querying All student prefs");
-        CriteriaQuery<StudentPrefs> c = em.getCriteriaBuilder().createQuery(StudentPrefs.class);
-        c.from(StudentPrefs.class);
+        CriteriaQuery<StudentInfoView> c = em.getCriteriaBuilder().createQuery(StudentInfoView.class);
+        c.from(StudentInfoView.class);
         return em.createQuery(c).getResultList();
     }
 

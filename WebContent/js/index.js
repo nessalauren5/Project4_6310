@@ -21,9 +21,7 @@ var uri = "http://localhost:8080/services/";
 			dataType:"json",
 			data: JSON.stringify({username:usr,password:pwd}),
 			success : function(data) {
-				console.log(data);
-				var TA = data.result.isTA ? "true":"false";
-				$(location).attr('href',"/landingPage"+data.result.usertype+".html?id="+data.result.userID+"&r="+TA);
+				$(location).attr('href',"/landingPage"+data.username);
 			},
 			error: function (request, error) {
        		 console.log(arguments);

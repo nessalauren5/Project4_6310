@@ -48,7 +48,9 @@ public class CourseDAOImpl implements CourseDAO {
 
     public List<CourseModel> getCourseListForUser(String[] courses){
 //        ArrayList<Integer> courses = new ArrayList<>();
-
+        for(int i =0; i<courses.length; i++){
+            log.log(Level.INFO,"Searching for course" );
+        }
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<CourseModel> cq = cb.createQuery(CourseModel.class);

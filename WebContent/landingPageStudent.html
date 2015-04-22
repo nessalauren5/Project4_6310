@@ -20,7 +20,7 @@
     <link href="css/landingPage.css" rel="stylesheet">
 
     <!--jQuery-->
-    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -34,7 +34,6 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <a id="semester" class="navbar-brand navbar-right">Fall 2015</a>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -51,12 +50,10 @@
                         <a href="index.html">Logout</a>
                     </li>
                     <li>
-                        <a id="TA" href="landingPageProfessor.html" style="display: none;">Professors and TAs</a>
-
+                        <a href="#"></a>
                     </li>
                     <li>
-                        <a href="landingPageAdministrator.html" style="display: none;">Administrators and Developers</a>
-
+                        <a href="#"></a>
                     </li>
                 </ul>
             </div>
@@ -68,22 +65,23 @@
 
         <!-- Jumbotron Header -->
         <header class="jumbotron hero-spacer">
-            <h1 style="display:inline;">Welcome <span id="fname">[First Name]</span>  <span id="lname">[Last Name]</span>!</h1>
+            <h1 style="display:inline;">Welcome [name]!</h1>
+            <h3 id="semester" style="display:inline; float: right;">Fall 2015</h3>
             <div class="imgAndInfoContainer">
                 <img class="imgAndInfo" src="img/profilePhoto.png" alt="">
                 <div class="imgAndInfoText col-md-2">
                     <div class="imgAndInfoRow">
-
+                        <p id="fname" class="imgAndInfo clearBoth">[First Name]</p>
+                        <p id="lname" class="imgAndInfo">[Last Name]</p>
                         <p class="imgAndInfo"></p>
                     </div>
                     <div class="imgAndInfoRow">
                         <p class="imgAndInfo clearBoth">GTID: </p>
                         <p id="gtid" class="imgAndInfo">[1234567890]</p>
                     </div>
-                    <img src="img/loading.gif" id="loadingDiv" style="display: none">
                     <div class="imgAndInfoRow">
                         <p class="imgAndInfo clearBoth">Desired Courseload: </p>
-                        <select class="selectpicker imgAndInfo" id="courseload">
+                        <select class="selectpicker imgAndInfo">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -138,44 +136,95 @@
                 <div class="thumbnail">
                     <div class="caption">
                         <h3>Course Catalog</h3>
-                        <table id="RegisteredCourses" class="table" style="text-align: left">
+                        <table id="RegisteredCourses" class="table" style="width:100%">
                             <!-- this row is the metadata row -->
                           <tr class="th">
-                              <td>Program</td>
                             <td>Course #</td>
                             <td>Course Name</td>
+                            <td>Seats</td> 
+                            <td>Capacity</td>
                             <td>Add to List</td>
                           </tr>
                           <!-- Loop over these rows, fill in 1/2/3/4/5 with a counter variable -->
                           <!-- Set rows with 0 to class="text-red" set rows with above 0 to class="text-green" -->
+                          <tr id="course1">
+                            <td class="courseNumber">6300</td>
+                            <td>SDP</td>
+                            <td class="text-red">0</td> 
+                            <td>267</td>
+                            <td><button class="btn btn-primary" onclick="addClass(1)">+</button></td>
+                          </tr>
+                          <tr id="course2">
+                            <td class="courseNumber">6310</td>
+                            <td>SAP</td>
+                            <td class="text-green">9</td> 
+                            <td>234</td>
+                            <td><button class="btn btn-primary" onclick="addClass(2)">+</button></td>
+                          </tr>
+                          <tr id="course3">
+                            <td class="courseNumber">6300</td>
+                            <td>AI</td>
+                            <td class="text-green">15</td> 
+                            <td>250</td>
+                            <td><button class="btn btn-primary" onclick="addClass(3)">+</button></td>
+                          </tr>
+                          <tr id="course4">
+                            <td class="courseNumber">6300</td>
+                            <td>SDP</td>
+                            <td class="text-red">0</td> 
+                            <td>187</td>
+                            <td><button class="btn btn-primary" onclick="addClass(4)">+</button></td>
+                          </tr>
+                          <tr id="course5">
+                            <td class="courseNumber">6440</td>
+                            <td>HI</td>
+                            <td class="text-green">19</td> 
+                            <td>231</td>
+                            <td><button class="btn btn-primary" onclick="addClass(5)">+</button></td>
+                          </tr>
                         </table>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6 col-sm-12 hero-feature">
-                <div class="thumbnail"  >
-                    <div class="caption" id="preferences">
+                <div class="thumbnail">
+                    <div class="caption">
                         <h3>Course Preferences</h3>
                         <div class="thumbnail">
                             <ol id="priorityList" class="sortable-list">
-                            </ol>
-                        </div>
-                    </div>
-                    <div class="caption" id="suggestions" style="display:none;">
-                        <h3>Fall 2015 Approved Courses</h3>
-                        <div class="thumbnail">
-                            <ol id="courseList" class="sortable-list">
+                                <li class="sortable-item">
+                                    <span>6310: SAP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>7367: KBAI</span>
+                                </li>
                             </ol>
                         </div>
                     </div>
                     <div class="caption">
                         <p>
-                            <button id="toggleBtn" class="btn btn-primary" onclick="getRecommendedSchedule()" style="margin-top: 15px;">
-                                View Advised Schedule</button>
+                            <button id="showRecommendedSchedule" class="btn btn-primary" onclick="getRecommendedSchedule()">
+                                View Recommended Schedule
+                            </button>
                         </p>
 
-
+                        <div id="recommendedSchedule" class="thumbnail" style="display: none;">
+                            <ol id="recommendedList" class="sortable-list">
+                                <li class="sortable-item">
+                                    <span>6300: SDP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>6310: SAP</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>6440 HI</span>
+                                </li>
+                                <li class="sortable-item">
+                                    <span>7367 KBAI</span>
+                                </li>
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -186,7 +235,7 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12 center">
+                <div class="col-lg-12">
                     <center>
                         <p>Copyright &copy; Keith Adler 2015</p>
                     </center>

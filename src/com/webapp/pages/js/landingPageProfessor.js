@@ -1,26 +1,6 @@
 $(document).ready(function(){
   $('.sortable-list').sortable();
 
-  /*
-  //Here is my attempt to show the link when the r is 0
-  //Also, we need to add to the link all the URL parameters (id and r)
-  var field = 'r';
-  var url = window.location.href;
-  console.log(url.indexOf('&' + field + '=') != '0');
-  if(url.indexOf('&' + field + '=') != '0') {
-    document.getElementById('TA').style.display = '';
-    event.preventDefault();
-  }*/
-
-  var $loading = $('#loadingDiv').hide();
-  $(document)
-      .ajaxStart(function () {
-        $loading.show();
-      })
-      .ajaxStop(function () {
-        $loading.hide();
-      });
-
   $.QueryString = (function(a) {
     if (a == "") return {};
     var b = {};
@@ -32,6 +12,24 @@ $(document).ready(function(){
     }
     return b;
   })(window.location.search.substr(1).split('&'))
+
+  //Here is my attempt to show the link when the r is 0
+  //Also, we need to add to the link all the URL parameters (id and r)
+  var field = 'r';
+  var r =  $.QueryString["r"];
+  if(r == 'true') {
+    document.getElementById('TA').style.display = '';
+  }
+
+  var $loading = $('#loadingDiv').hide();
+  $(document)
+      .ajaxStart(function () {
+        $loading.show();
+      })
+      .ajaxStop(function () {
+        $loading.hide();
+      });
+
 
   var id = $.QueryString["id"];
 
@@ -49,7 +47,10 @@ $(document).ready(function(){
     contentType: "application/json",
     dataType:"json",
     success : function(data) {
+      var TA = data.result.isTA ? "true":"false";
+
       loadPage(data.result);
+      document.getElementById("TA").href="landingPageStudent.html?id="+data.result.userID+"&r="+TA;
     },
     error: function (request, error) {
       alert(" Can't do because: " + error);
@@ -82,6 +83,7 @@ $(document).ready(function(){
     if(list && list.length>0){
       $.each(list, function(key, course) {
         $("#RegisteredCourses").append("<tr id='" + course.courseID + "'><<td>" + course.program+ "</td> <td>" + course.courseID + "</td><td>" + course.name + "</td><td style='text-align: center'> <button class='btn btn-primary' onclick='courseDetails(" + course.courseID+")'>+</button></td></tr>");
+
       });
     }
   }
